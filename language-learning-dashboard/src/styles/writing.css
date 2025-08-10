@@ -1,0 +1,111 @@
+/* Dark Theme Variables */
+:root {
+  --bg-dark: #121212;
+  --bg-darker: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --accent-color: #bb86fc;
+  --accent-hover: #9a67ea;
+  --card-bg: #252525;
+  --card-hover: #333333;
+}
+
+.dark-theme {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.writing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.writing-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--accent-color), #03dac6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.writing-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.practice-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #333;
+}
+
+.practice-card:hover {
+  transform: translateY(-5px);
+  background: var(--card-hover);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.practice-card h3 {
+  color: var(--text-primary);
+  margin: 1rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.practice-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Individual card accents */
+.letter-card {
+  border-top: 4px solid #bb86fc;
+}
+
+.word-card {
+  border-top: 4px solid #03dac6;
+}
+
+.sentence-card {
+  border-top: 4px solid #ff7597;
+}
+
+.game-card {
+  border-top: 4px solid #ffb86c;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .practice-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .writing-title {
+    font-size: 2rem;
+  }
+}

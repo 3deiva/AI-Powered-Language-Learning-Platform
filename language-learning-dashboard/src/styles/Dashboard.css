@@ -1,0 +1,684 @@
+/* src/styles/Dashboard.css */
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #171923;
+  --accent-primary: #6c63ff;
+  --accent-secondary: #7928ca;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --card-hover: rgba(108, 99, 255, 0.2);
+  --shadow-color: rgba(12, 10, 29, 0.3);
+  --glass-bg: rgba(23, 25, 35, 0.7);
+  --transition-speed: 0.3s;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(circle at top right, #141827, var(--bg-primary));
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+/* Background Elements */
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(121, 40, 202, 0.03),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(108, 99, 255, 0.03),
+      transparent 25%
+    );
+  z-index: -1;
+}
+
+/* Header Styles - Updated with username fix */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.dashboard-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.header-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2);
+}
+
+/* Add this to your CSS file */
+.header-content h1 span {
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .header-content h1 span {
+    max-width: 150px;
+  }
+}
+.header-content h1 span::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  z-index: -1;
+  opacity: 0.25;
+  border-radius: 4px;
+  filter: blur(2px);
+}
+
+.header-content p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.profile-button,
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.profile-button:hover,
+.logout-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(108, 99, 255, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.profile-button:hover::before {
+  opacity: 1;
+}
+
+.logout-button {
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.logout-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 107, 107, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.logout-button:hover::before {
+  opacity: 1;
+}
+
+/* Learning Categories Section */
+.learning-categories {
+  margin-top: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  border-radius: 3px;
+}
+
+.view-all {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+}
+
+.view-all:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(3px);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.skill-card {
+  position: relative;
+  padding: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all var(--transition-speed) ease;
+  z-index: 1;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.03);
+  z-index: -1;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  transition: all 0.6s ease;
+}
+
+.skill-card:hover::before {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.05);
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.reading::after,
+.writing::after,
+.listening::after,
+.speaking::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  filter: blur(80px);
+  z-index: -2;
+  opacity: 0.15;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.skill-card:hover::after {
+  opacity: 0.3;
+}
+
+.reading::after {
+  top: 20%;
+  left: 20%;
+  background: #6c63ff;
+}
+
+.writing::after {
+  top: 20%;
+  right: 20%;
+  background: #00c2ff;
+}
+
+.listening::after {
+  bottom: 20%;
+  left: 20%;
+  background: #7928ca;
+}
+
+.speaking::after {
+  bottom: 20%;
+  right: 20%;
+  background: #ff6b6b;
+}
+
+.skill-icon {
+  padding: 1rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: inline-flex;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.reading .skill-icon {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(108, 99, 255, 0.2),
+    rgba(108, 99, 255, 0.05)
+  );
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+}
+
+.writing .skill-icon {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 194, 255, 0.2),
+    rgba(0, 194, 255, 0.05)
+  );
+  box-shadow: 0 0 20px rgba(0, 194, 255, 0.2);
+}
+
+.listening .skill-icon {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(121, 40, 202, 0.2),
+    rgba(121, 40, 202, 0.05)
+  );
+  box-shadow: 0 0 20px rgba(121, 40, 202, 0.2);
+}
+
+.speaking .skill-icon {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.2),
+    rgba(255, 107, 107, 0.05)
+  );
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+}
+
+.skill-card h3 {
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.skill-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.2px;
+}
+
+.btn {
+  border: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-align: center;
+  margin-top: 0.5rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+
+.primary {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  box-shadow: 0 6px 12px rgba(108, 99, 255, 0.2);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(108, 99, 255, 0.3);
+}
+
+.reading .primary {
+  background: linear-gradient(135deg, #6c63ff, #5a54d1);
+}
+
+.writing .primary {
+  background: linear-gradient(135deg, #00c2ff, #0097c2);
+}
+
+.listening .primary {
+  background: linear-gradient(135deg, #7928ca, #6018a9);
+}
+
+.speaking .primary {
+  background: linear-gradient(135deg, #ff6b6b, #d94f4f);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.25rem;
+  color: #ffffff;
+  background: var(--bg-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .profile-button,
+  .logout-button {
+    flex: 1;
+    justify-content: center;
+    max-width: 48%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.skill-icon {
+  animation: float 3s infinite ease-in-out;
+}
+
+.skill-card:nth-child(1) .skill-icon {
+  animation-delay: 0s;
+}
+
+.skill-card:nth-child(2) .skill-icon {
+  animation-delay: 0.5s;
+}
+
+.skill-card:nth-child(3) .skill-icon {
+  animation-delay: 1s;
+}
+
+.skill-card:nth-child(4) .skill-icon {
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-header,
+.section-header,
+.skill-card {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.dashboard-header {
+  animation-delay: 0.1s;
+}
+.section-header {
+  animation-delay: 0.2s;
+}
+.skill-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.skill-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.skill-card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.skill-card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+/* Add this to your Dashboard.css */
+/* Add these updated styles to your Dashboard.css */
+
+/* Update the image container styles */
+/* Update the image container styles */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: inherit; /* Inherit the bubble shape from parent */
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+}
+
+.skill-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  border-radius: inherit; /* Match container's border radius */
+}
+
+/* Restore the bubble shape styling */
+.skill-card {
+  position: relative;
+  padding: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all var(--transition-speed) ease;
+  z-index: 1;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.03);
+  z-index: -1;
+  border-radius: inherit; /* Match card's border radius */
+  transition: all 0.6s ease;
+}
+
+/* Adjust the skill icon position */
+.skill-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Content positioning */
+.skill-card h3,
+.skill-card p,
+.skill-card .btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hover effects */
+.skill-card:hover::before {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.05);
+}
+
+.skill-card:hover .skill-image {
+  transform: scale(1.05);
+}

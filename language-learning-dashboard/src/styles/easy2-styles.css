@@ -1,0 +1,696 @@
+/* ========== VARIABLES ========== */
+:root {
+  /* Colors */
+  --bg-primary: #0f1117;
+  --bg-secondary: #171923;
+  --accent-primary: #6c63ff;
+  --accent-secondary: #7928ca;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --correct-color: #4ade80;
+  --incorrect-color: #f87171;
+  --glass-bg: rgba(23, 25, 35, 0.7);
+  --shadow-color: rgba(12, 10, 29, 0.3);
+
+  /* Spacing & Sizing */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 20px;
+
+  /* Animation */
+  --transition-speed: 0.3s;
+}
+
+/* ========== BASE STYLES ========== */
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top right, #141827, var(--bg-primary));
+  color: var(--text-primary);
+  font-family: "Inter", "Arial Unicode MS", "Noto Sans Tamil", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Tamil Font Support */
+@font-face {
+  font-family: "Noto Sans Tamil";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/notosanstamil/v19/oPBSK3gatDvS5h-xD8LQ7QZR7Jp4Q.woff2)
+    format("woff2");
+  unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC;
+}
+
+/* ========== LAYOUT CONTAINERS ========== */
+.practice-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.practice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.practice-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.progress-tracker {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-xl);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.progress-current {
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.progress-divider {
+  margin: 0 0.3rem;
+  opacity: 0.7;
+}
+
+/* ========== CARDS & SECTIONS ========== */
+.question-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  margin-bottom: 1.5rem;
+}
+
+.question-prompt {
+  margin-bottom: 1.5rem;
+}
+
+.question-prompt h2 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+}
+
+.word-display {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-sm);
+  font-family: "Noto Sans Tamil", sans-serif;
+}
+
+/* ========== INPUT METHODS ========== */
+.input-methods {
+  margin-bottom: 1.5rem;
+}
+
+.method-tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  font-size: 0.95rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.tab-button.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-primary);
+}
+
+.method-content {
+  min-height: 300px;
+}
+
+/* Drawing Container */
+.drawing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Upload Container */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-dropzone {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-align: center;
+  width: 100%;
+  min-height: 200px;
+}
+
+.upload-dropzone:hover {
+  border-color: var(--accent-primary);
+  background: rgba(108, 99, 255, 0.05);
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-primary);
+}
+
+.upload-instructions {
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.upload-requirements {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.upload-preview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-preview img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: contain;
+}
+
+.replace-button {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.replace-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== BUTTONS ========== */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.primary-button,
+.secondary-button {
+  flex: 1;
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.primary-button {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: white;
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 99, 255, 0.3);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.submit-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.7s ease;
+  opacity: 0;
+}
+
+.submit-button:hover::after {
+  transform: rotate(30deg) translate(100%, 100%);
+  opacity: 1;
+}
+
+.next-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
+/* ========== EVALUATION CARD ========== */
+.evaluation-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.evaluation-card.correct {
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.evaluation-card.incorrect {
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.evaluation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.evaluation-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.evaluation-card.correct .evaluation-header h3 {
+  color: var(--correct-color);
+}
+
+.evaluation-card.incorrect .evaluation-header h3 {
+  color: var(--incorrect-color);
+}
+
+.accuracy-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--border-radius-xl);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.evaluation-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.detail-label {
+  width: 100px;
+  color: var(--text-secondary);
+}
+
+.detail-value {
+  font-weight: 500;
+  font-family: "Noto Sans Tamil", sans-serif;
+}
+
+.feedback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ========== RESULTS PAGE ========== */
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.results-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.3);
+}
+
+.score-percent {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.score-detail {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.results-details {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  margin-bottom: 2rem;
+}
+
+.results-details h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.result-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-sm);
+  padding: 1rem;
+  transition: transform var(--transition-speed) ease;
+}
+
+.result-card:hover {
+  transform: translateY(-3px);
+}
+
+.result-card.correct {
+  border-left: 3px solid var(--correct-color);
+}
+
+.result-card.incorrect {
+  border-left: 3px solid var(--incorrect-color);
+}
+
+.result-word {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: "Noto Sans Tamil", sans-serif;
+}
+
+.result-status {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-card.correct .result-status {
+  color: var(--correct-color);
+}
+
+.result-card.incorrect .result-status {
+  color: var(--incorrect-color);
+}
+
+.result-accuracy,
+.result-detected {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ========== LOADING & ERROR STATES ========== */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.error-screen h2 {
+  color: var(--incorrect-color);
+  margin-bottom: 1rem;
+}
+
+.error-screen p {
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 600px) {
+  .practice-container {
+    padding: 1rem;
+  }
+
+  .question-card,
+  .evaluation-card {
+    padding: 1rem;
+  }
+
+  .word-display {
+    font-size: 2rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-actions {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .practice-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .word-display {
+    font-size: 3rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Special landscape orientation adjustments */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .practice-container {
+    padding: 0.5rem;
+  }
+
+  .question-card,
+  .evaluation-card {
+    padding: 0.8rem;
+  }
+
+  .method-content {
+    min-height: 200px;
+  }
+
+  .word-display {
+    font-size: 1.8rem;
+    padding: 0.5rem;
+  }
+}

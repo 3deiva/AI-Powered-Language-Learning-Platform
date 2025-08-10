@@ -1,0 +1,406 @@
+/* src/styles/Profile.css */
+/* Dark Theme for Profile Page */
+
+:root {
+  --primary-color: #4a6cf7;
+  --primary-hover: #3a5ce4;
+  --secondary-color: #6c757d;
+  --dark-bg: #121212;
+  --dark-card-bg: #1e1e1e;
+  --dark-input-bg: #2d2d2d;
+  --dark-border: #333333;
+  --dark-text: #e0e0e0;
+  --dark-text-secondary: #aaaaaa;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --reading-color: var(--primary-color);
+  --writing-color: var(--success-color);
+  --speaking-color: var(--warning-color);
+  --listening-color: var(--info-color);
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --transition: all 0.3s ease;
+}
+
+/* Apply dark theme to body or a wrapper */
+.dark-theme {
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+}
+
+/* Profile Page Container */
+.profile-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  min-height: 100vh;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+/* Back Button */
+.back-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--dark-text-secondary);
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.back-button:hover {
+  color: var(--primary-color);
+}
+
+.back-button span {
+  margin-left: 0.5rem;
+}
+
+/* Card Styling */
+.card {
+  background-color: var(--dark-card-bg);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header-title .icon {
+  margin-right: 0.75rem;
+  color: var(--primary-color);
+}
+
+.header-title h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--dark-text);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn svg {
+  margin-right: 0.5rem;
+}
+
+.btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: var(--dark-text);
+  border: 1px solid var(--dark-border);
+}
+
+.btn.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Error Message */
+.error-message {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #f8d7da;
+  padding: 0.75rem;
+  margin: 1rem 1.5rem 0;
+  border-radius: 5px;
+  border-left: 4px solid var(--danger-color);
+  font-size: 0.875rem;
+}
+
+/* Profile Avatar */
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* Profile Details */
+.profile-details {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item .label {
+  font-size: 0.875rem;
+  color: var(--dark-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.detail-item .value {
+  font-size: 1rem;
+  color: var(--dark-text);
+}
+
+/* Profile Form */
+.profile-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  color: var(--dark-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  background-color: var(--dark-input-bg);
+  border: 1px solid var(--dark-border);
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: var(--dark-text);
+  transition: var(--transition);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+}
+
+.form-group input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Progress Stats */
+.profile-stats {
+  padding: 1.5rem;
+  border-top: 1px solid var(--dark-border);
+}
+
+.profile-stats h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 1.25rem;
+  color: var(--dark-text);
+}
+
+.progress-summary {
+  display: grid;
+  gap: 1rem;
+}
+
+.progress-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 50px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skill-name {
+  font-size: 0.875rem;
+  color: var(--dark-text);
+}
+
+.progress-track {
+  height: 8px;
+  background-color: var(--dark-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-value {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+/* Different colors for each skill */
+.progress-item:nth-child(1) .progress-value {
+  background-color: var(--reading-color);
+}
+
+.progress-item:nth-child(2) .progress-value {
+  background-color: var(--writing-color);
+}
+
+.progress-item:nth-child(3) .progress-value {
+  background-color: var(--speaking-color);
+}
+
+.progress-item:nth-child(4) .progress-value {
+  background-color: var(--listening-color);
+}
+
+.skill-percent {
+  font-size: 0.875rem;
+  color: var(--dark-text-secondary);
+  text-align: right;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.1rem;
+  color: var(--dark-text-secondary);
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 768px) {
+  .profile-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile-header h1 {
+    margin-top: 0;
+  }
+
+  .card-body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .profile-avatar {
+    margin-bottom: 0;
+  }
+
+  .progress-item {
+    grid-template-columns: 100px 1fr 50px;
+  }
+}
+
+/* System Light/Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  body:not(.light-theme) .profile-page-container {
+    color: var(--dark-text);
+    background-color: var(--dark-bg);
+  }
+}
+
+/* Theme Toggle Support */
+body.light-theme .profile-page-container {
+  --dark-bg: #f8f9fa;
+  --dark-card-bg: #ffffff;
+  --dark-input-bg: #f1f3f5;
+  --dark-border: #dee2e6;
+  --dark-text: #212529;
+  --dark-text-secondary: #6c757d;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .profile-page-container {
+    padding: 1rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .progress-item {
+    grid-template-columns: 70px 1fr 40px;
+    gap: 0.5rem;
+  }
+
+  .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+}
